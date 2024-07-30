@@ -4,7 +4,7 @@
 
 **Features:**
 - Flush DNS.
-- Flush DNS every 1 second.
+- Flush DNS every 10 seconds.
 - Check ping.
-- Flush DNS every 3 seconds with ping counter.
+- Flush DNS with ping counter.
 
