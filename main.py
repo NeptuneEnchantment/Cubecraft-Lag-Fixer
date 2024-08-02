@@ -23,29 +23,33 @@ def clear_screen():
 
 def check_ping():
     ping_cmd = str(subprocess.run(["ping", "mco.cubecraft.net"], capture_output=True))
-    return ping_cmd[190:194]
+    ping = ping_cmd[190:194]
+    if ping == "":
+        return f"{colorama.Fore.LIGHTRED_EX} No internet connection."
+    else:
+        return f"{colorama.Fore.LIGHTBLUE_EX} Ping: {ping}"
 
 
 if option == 1:
     try:
         flush_dns()
         print("Flushed DNS!")
-    except:
-        sys.exit("Something went wrong.")
+    except Exception as e:
+        print(f"There was an error while flushing dns: {e}")
 
 elif option == 2:
     print("Flushing DNS...")
     while True:
         try:
             flush_dns()
-        except:
-            sys.exit("Something went wrong.")
+        except Exception as e:
+            print(f"There was an error while flushing dns: {e}")
         time.sleep(10)
 
 elif option == 3:
     clear_screen()
     while True:
-        sys.stdout.write(f"\rPing: {check_ping()}")
+        sys.stdout.write(f"\r{check_ping()}")
         sys.stdout.flush()
         time.sleep(3)
 
@@ -54,8 +58,8 @@ elif option == 4:
     while True:
         flush_dns()
         for p in range(3):
-            sys.stdout.write(f"\rPing: {check_ping()}")
+            sys.stdout.write(f"\r{check_ping()}")
             sys.stdout.flush()
-            time.sleep(3)
+            time.sleep(3.33)
 else:
-    print("Invalid Option Selected.")
+    print("Invalid option selected.")
