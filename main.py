@@ -23,12 +23,17 @@ def clear_screen():
 
 def check_ping():
     ping_cmd = str(subprocess.run(["ping", "mco.cubecraft.net"], capture_output=True))
-    ping = ping_cmd[190:194]
+    ping = ping_cmd[185:195]
+    # remove non-numbers
+    ping = ''.join([i for i in ping if i.isdigit()])
+    # check if there is not an internet connection
     if ping == "":
         return f"{colorama.Fore.LIGHTRED_EX} No internet connection."
     else:
-        return f"{colorama.Fore.LIGHTBLUE_EX} Ping: {ping}"
+        return f"{colorama.Fore.LIGHTBLUE_EX} Ping: {ping}ms"
 
+
+# selection for options
 
 if option == 1:
     try:
